@@ -4,7 +4,7 @@ import schedule
 import time
 import os
 
-def coletor():
+def coleta():
 
    # Check se a variavel de ambiente do mongodb foi declarado
    if not 'MONGODB' in os.environ:
@@ -48,7 +48,9 @@ def coletor():
 
 
 #Criando o schedule
-schedule.every().day.at("10:30").do(job)
+schedule.every().day.at("10:30").do(coleta)
+schedule.every().minute.at(":17").do(coleta)
+
 
 while True:
    schedule.run_pending()
