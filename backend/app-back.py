@@ -3,13 +3,14 @@ from lib import DadosAbertos
 import schedule
 import time
 import os
+import sys
 
 def coleta():
 
    # Check se a variavel de ambiente do mongodb foi declarado
    if not 'MONGODB' in os.environ:
        print('Set a variavel MONGODB')
-       break
+       sys.exit(-1)
 
    # hostname do mongodb, consultado via variavel de ambiente
    server_mongo = os.environ['MONGODB']
