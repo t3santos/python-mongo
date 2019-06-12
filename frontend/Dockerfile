@@ -4,4 +4,4 @@ LABEL maintainer Clodonil Trigo "clodonil@nisled.org"
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements
-CMD ["/bin/bash", "-c", "python app-back.py"]
+CMD ["/bin/bash", "-c", "python start.py"]
