@@ -7,13 +7,9 @@ import sys
 
 def coleta():
 
-   # Check se a variavel de ambiente do mongodb foi declarado
-   if not 'MONGODB' in os.environ:
-       print('Set a variavel MONGODB')
-       sys.exit(-1)
 
    # hostname do mongodb, consultado via variavel de ambiente
-   server_mongo = os.environ['MONGODB']
+   server_mongo = 'mongodb'
 
    # Conexao ao mongoDB
    conn = MongoClient(server_mongo, 27017)

@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 # Conexao ao mongoDB
-conn = MongoClient('localhost', 27017)
+conn = MongoClient('mongodb', 27017)
 
 # Conexao ao database
 banco = conn['projetoDep']

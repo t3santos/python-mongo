@@ -32,12 +32,12 @@ Criando a imagem Docker:
 Entre no diretório `backend` e execute:
 
 ```
-$  docker build -t clodonil/app-back:latest .
+docker build -t clodonil/app-back:latest .
 ```
 Entre no diretório `frontend` e execute:
 
 ```
-$ docker build -t  clodonil/app-front:latest .
+docker build -t  clodonil/app-front:latest .
 ```
 
 Caso você não tenha o docker instalado no seu computador, pode utilizar o [labs.play-with-docker.com](https://labs.play-with-docker.com) para realizar o `build` do container.
