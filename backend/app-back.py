@@ -39,8 +39,8 @@ def coleta():
              'Nome'   : dep['nome'],
              'Partido': dep['siglaPartido'],
              'Foto'   : dep['urlFoto']
-      }
-      list_deputados.append(info)
+       }
+       list_deputados.append(info)
 
 
    # Inserindo dados no mongodb
