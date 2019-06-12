@@ -2,7 +2,7 @@
 
 Esse exercício tem como objetivo desenvolver um infográfico com os dados dos deputados federais obtidos através do site [Portal Brasileiro de Dados Abertos](https://dadosabertos.camara.leg.br/).
 
-Arquitetura da solução proposta foi a seguinte:
+Arquitetura da solução proposta:
 
 ![arquitetura](img/arquitetura.png)
 
@@ -10,7 +10,7 @@ Arquitetura da solução proposta foi a seguinte:
 * **app-back:** Função em Python para conectar na API dos dados abertos, processar e gravar no `MongoDB`.
 * **app-front:** Aplicação em Python com Flask para apresentar os dados consolidados no `MongoDB`.
 
-> O AppBack vai ser executado 1 vez ao dia (agendamento), o mesmo pode ser acionado por qualquer `scheduler`. Nesse exercício vamos utilizar o `scheduler` do  Python para fazer essa tarefa, não é a melhor solução.
+> O app-back é executado 1 vez ao dia (agendamento). Esse agendamento pode ser feito por qualquer `scheduler`. Nesse exercício vamos utilizar o `scheduler` do  Python para fazer essa tarefa. Sabemos que essa não é a melhor solução.
 
 
 ## Desenvolvimento
@@ -23,11 +23,17 @@ Para iniciar o `MongoDB`:
 docker run -d -p 27017-27019:27017-27019  --name mongodb mongo:latest
 ```
 
-Todo o desenvolvimento do `AppBack` e do `AppFront` pode ser visualizada na basta [backend](backend) e na [frontend](frontend).
+Todo o desenvolvimento do `AppBack` e do `AppFront` pode ser visualizada na pasta [backend](backend) e na [frontend](frontend).
+
+No arquivo `requirements` estão as dependências que deve ser instalado para o funcionamento da aplicação.
+
+```bash
+pip install -r requirements
+```  
 
 O `Dockerfile` para criação das images dos container está no diretório de cada código.
  
-Criando a imagem Docker:
+Para criar a imagem Docker:
 
 Entre no diretório `backend` e execute:
 
@@ -48,7 +54,7 @@ O `Play Docker` cria uma instância por 4 horas, tempo suficiente para você rea
 
 > Após realizar o login no site, crie uma nova instância na opção (Add New Instance)
 
-Com a instância criada, clone o projeto:
+Com a instância criada, clone o projeto e faça o `build` das images conforme mostrado acima:
 
 ```bash
 $ git clone https://github.com/clodonil/python-mongodb-flask.git
@@ -91,13 +97,9 @@ Para finalizer, vamos utilizar o `docker-composer` para orquestrar as images de 
 version: '3'
 services:
   mongodb:
-    container_name: mongodb
-    image: mongo:latest
-    ports:
-      - 27017-27019:27017-27019
-
+     image: mongo:latest
+ 
   backend:
-    container_name: backend
     image: clodonil/app-back:latest
     depends_on:
       - mongodb
@@ -105,7 +107,6 @@ services:
       - mongodb
 
   frontend:
-    container_name: frontend
     image: clodonil/app-front:latest
     ports:
       - 8080:8080
