@@ -20,7 +20,7 @@ Para o desenvolvimento local, vamos utilizar o container do `MongoDB`.
 Para iniciar o `MongoDB`:
 
 ```
-$ docker run -d -p 27017-27019:27017-27019  --name mongodb mongo:latest
+docker run -d -p 27017-27019:27017-27019  --name mongodb mongo:latest
 ```
 
 Todo o desenvolvimento do `AppBack` e do `AppFront` pode ser visualizada na basta [backend](backend) e na [frontend](frontend).
