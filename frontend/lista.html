@@ -40,7 +40,7 @@
         <th>Nome</th>
         <th>Estado</th>
         <th>Partido</th>
-        <th>Gastos</th>
+        
     </tr>
 {% for lista in listas %}
       <tr>
@@ -48,7 +48,7 @@
         <td>{{ lista['nome']        }}</td>
         <td>{{ lista['siglaUf']     }}</td>
         <td>{{ lista['siglaPartido']}}</td>
-        <td><a href=/gastos/{{lista['id']}}>Gastos</a></td>        
+             
      </tr>
      
 {% endfor %}
