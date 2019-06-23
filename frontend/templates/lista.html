@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            h1{
+                color: blue;
+                font-family: verdana;
+                font-size: 300%;
+            }
+            table {
+              width:70%;
+            }
+            table, th, td {
+               border: 1px solid black;
+               border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color: #fff;
+            }
+            table#t01 th {
+              background-color: black;
+              color: white;
+            }
+         </style>
+		 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    </head>
+	
+
+<body">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>	
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>	
+	
+<div class="row" style="text-align:center;">
+	<h1 style="color:blue; font-family: Verdana;"> Nossa Métrica: Gastos dos últimos 6 meses por deputado.<h1>
+</div>	
+
+<div class="row" id="Grafico" style="text-align:center; display:none; width:400px; height: 200px;">
+	<canvas style="margin-left: 50%;" id="myChart" width="400" height="200"></canvas>
+</div>
+
+<div>
+
+<div class="row" style="width:100%" text-align:center;">
+
+<table style="margin-left: 20%">
+    <tr>
+        <th>Foto</th>
+        <th>Nome</th>
+        <th>Partido</th>
+		<th>Gráfico de Gastos</th>
+    </tr>
+{% for lista in listas %}
+    <tr>
+       <td><img src={{ lista['Foto']}} width="50px" height="50px"/></td>
+       <td>{{ lista['Nome']        }}</td>
+       <td>{{ lista['Partido']}}</td>
+       <td><button onclick="clickx({{ lista['_id'] }});"> Exibir Gráfico de Gastos </button></td>
+    </tr>
+
+{% endfor %}
+</table>
+
+</div>
+
+<script>
+
+	function clickx(idRecebido) {
+		var x = Math.random() * 1000; var y = Math.random() * 1000; var z = Math.random() * 1000;
+		var a = Math.random() * 1000; var b = Math.random() * 1000; var c = Math.random() * 1000;
+		var d = Math.random() * 1000;
+		$.ajax({
+			method: "GET",
+			url: "https://dadosabertos.camara.leg.br/api/v2/deputados/" + idRecebido + '/despesas',
+			data: {},
+			success: function(dados) {
+
+			    var ctx = document.getElementById('myChart').getContext('2d');
+                var chart = new Chart(ctx, {
+              // The type of chart we want to create
+    type: 'line',
+
+    
+
+    // The data for our dataset
+    data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Março', 'Junho', 'Julho'],
+        datasets: [{
+            label: 'Gastos dos meses',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [x, y, z, a, b, c, d]
+               }]
+             },
+
+             // Configuration options go here
+          options: {}
+        });
+			
+		
+		var graf = document.getElementById('Grafico');
+		graf.style.display = "block";
+			
+			}
+		})
+		
+		
+		
+		
+	}
+
+</script>
+
+</body>
+</html>
